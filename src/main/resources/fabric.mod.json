@@ -3,9 +3,9 @@
 	"id": "mace-cooldown",
 	"version": "${version}",
 	"name": "Mace Cooldown",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Fabric mod that adds a cooldown to the slam attack of the mace in Minecraft",
 	"authors": [
-		"Me!"
+		"Flopasss"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
