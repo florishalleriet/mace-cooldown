@@ -1,5 +1,7 @@
 package com.flopasss.macecooldown.mixin;
 
+import com.flopasss.macecooldown.MaceCooldown;
+
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +17,10 @@ public class MaceItemBlockerMixin {
 	@Inject(at = @At("HEAD"), method = "canSmashAttack")
 
 	private static void interceptCanSmashAttack(LivingEntity attacker, CallbackInfoReturnable<Boolean> callbackInfo) {
+		// Return if the cooldown is 0 or lower
+		if (MaceCooldown.CONFIG.cooldownTicks <= 0)
+			return;
+
 		// Return if the attacker is not a player
 		if (!(attacker instanceof Player player))
 			return;
