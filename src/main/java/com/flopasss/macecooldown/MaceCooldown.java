@@ -1,8 +1,10 @@
 package com.flopasss.macecooldown;
 
+import com.flopasss.macecooldown.command.MaceCooldownCommand;
 import com.flopasss.macecooldown.config.MaceCooldownConfig;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +24,14 @@ public class MaceCooldown implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Flopasss Mace Cooldown initialized!");
+		// Load the config when the mod initializes
+		CONFIG = MaceCooldownConfig.load();
 
-		CONFIG = MaceCooldownConfig.load(); // Load the config when the mod initializes
+		// Register the command
+		CommandRegistrationCallback.EVENT.register(
+				(dispatcher, registryAccess, environment) -> MaceCooldownCommand.register(dispatcher));
+
+		// Log a message to indicate that the mod has been initialized
+		LOGGER.info("Flopasss Mace Cooldown initialized!");
 	}
 }
