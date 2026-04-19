@@ -1,29 +1,35 @@
 package com.flopasss.macecooldown.mixin;
 
-import net.minecraft.world.item.MaceItem;
+import com.flopasss.macecooldown.MaceCooldown;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.MaceItem;
 import net.minecraft.world.item.ItemStack;
 
 @Mixin(MaceItem.class)
 public class MaceItemStarterMixin {
 	@Inject(method = "hurtEnemy", at = @At("TAIL"))
-	
+
 	private void onHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfo callbackInfo) {
 		// Return if the attacker is not a player
-		if (!(attacker instanceof Player player)) return;
+		if (!(attacker instanceof Player player))
+			return;
 
 		// Return if the player did not meet the smash requirements
-		if (!(attacker.fallDistance > 1.5 && !attacker.isFallFlying())) return;
+		if (!(attacker.fallDistance > 1.5 && !attacker.isFallFlying()))
+			return;
 
 		// Return if the mace is already on cooldown
-		if (player.getCooldowns().isOnCooldown(stack)) return;
+		if (player.getCooldowns().isOnCooldown(stack))
+			return;
 
 		// Start the cooldown
-		player.getCooldowns().addCooldown(stack, 600);
+		player.getCooldowns().addCooldown(stack, MaceCooldown.CONFIG.cooldownTicks);
 	}
 }
