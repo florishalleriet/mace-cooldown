@@ -17,13 +17,12 @@ public class MaceItemStarterMixin {
 		if (!(attacker instanceof Player player)) return;
 
 		// Return if the player did not meet the smash requirements
-		if(!(attacker.fallDistance > 1.5 && !attacker.isFallFlying())) return;
+		if (!(attacker.fallDistance > 1.5 && !attacker.isFallFlying())) return;
 
 		// Return if the mace is already on cooldown
-		ItemStack mace = player.getMainHandItem();
-		if (player.getCooldowns().isOnCooldown(mace)) return;
+		if (player.getCooldowns().isOnCooldown(stack)) return;
 
 		// Start the cooldown
-		player.getCooldowns().addCooldown(mace, 600);
+		player.getCooldowns().addCooldown(stack, 600);
 	}
 }
