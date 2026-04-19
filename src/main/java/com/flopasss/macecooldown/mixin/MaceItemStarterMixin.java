@@ -29,6 +29,10 @@ public class MaceItemStarterMixin {
 		if (!(attacker.fallDistance > 1.5 && !attacker.isFallFlying()))
 			return;
 
+		// Return if the target is not a player
+		if (!(target instanceof Player))
+			return;
+
 		// Return if the mace is already on cooldown
 		if (player.getCooldowns().isOnCooldown(stack))
 			return;
