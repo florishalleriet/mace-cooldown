@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 @Mixin(MaceItem.class)
 public class MaceItemStarterMixin {
 	@Inject(method = "hurtEnemy", at = @At("TAIL"))
+	
 	private void onHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfo callbackInfo) {
 		// Return if the attacker is not a player
 		if (!(attacker instanceof Player player)) return;

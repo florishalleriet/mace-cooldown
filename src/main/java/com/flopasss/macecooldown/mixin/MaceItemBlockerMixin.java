@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(MaceItem.class)
 public class MaceItemBlockerMixin {
 	@Inject(at = @At("HEAD"), method = "canSmashAttack")
+
 	private static void interceptCanSmashAttack(LivingEntity attacker,CallbackInfoReturnable<Boolean> callbackInfo) {
 		// Return if the attacker is not a player
 		if (!(attacker instanceof Player player)) return;
