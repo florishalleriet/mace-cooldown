@@ -16,6 +16,9 @@ public class MaceItemBlockerMixin {
 		// Return if the attacker is not a player
 		if (!(attacker instanceof Player player)) return;
 
+		// Return if the player did not meet the smash requirements
+		if (!(attacker.fallDistance > 1.5 && !attacker.isFallFlying())) return;
+
 		// Get the mace in the player's main hand
 		ItemStack mace = player.getMainHandItem();
 		// Return if the item in the player's main hand is not on cooldown
